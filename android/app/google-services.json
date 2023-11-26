@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "498548128833",
+    "project_id": "yella-403718",
+    "storage_bucket": "yella-403718.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498548128833:android:9985c6023a60d3fc799ac0",
+        "android_client_info": {
+          "package_name": "com.example.yella.yellafirstversion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBToMsPVpinrwjB8n6XZm4xfHw3QE_YLIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
