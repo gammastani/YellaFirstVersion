@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:yellafirstversion/components/my_button.dart';
 import 'package:yellafirstversion/components/my_textfield.dart';
@@ -89,6 +90,11 @@ class LoginPage extends StatelessWidget {
               // sign in button
               MyButton(
                 onTap: () {
+                  FirebaseFirestore.instance.collection('"userdata"').add(
+                      {
+                        // "name":"usama mukhtiar",
+                        // "email":"demo@gmail.com"
+                      });
                   // Call the signUserIn method when the button is tapped
                   signUserIn(context);
                 },
