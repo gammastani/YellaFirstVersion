@@ -1,28 +1,74 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yellafirstversion/components/my_button.dart';
 import 'package:yellafirstversion/components/my_textfield.dart';
 import 'package:yellafirstversion/components/square_tile.dart';
 import 'home_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   // text editing controllers
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   // sign user in method
-  Future<void> signUserIn(BuildContext context) async {
-    // Your sign-in logic goes here
+    void signUserIn() async {
 
-    // If sign-in is successful, navigate to the HomePage
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomePage()),
-    );
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+      );
+
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,);
+        Navigator.pop(context);
+      }
+      on FirebaseAuthException catch (e){
+        Navigator.pop(context);
+        if (e.code == 'invalid-credential'){
+          wrongEmailMessage();
+        }
+
+        else if (e.code == 'wrong-password'){
+          wrongPasswordMessage();
+        }
+      }
   }
 
+  void wrongEmailMessage(){
+    showDialog(
+      context: context,
+      builder: (context){
+        return const AlertDialog(
+          title: Text('Incorrect Email'),
+        );
+      },
+    );
+  }
+  void wrongPasswordMessage(){
+    showDialog(
+      context: context,
+      builder: (context){
+       return const AlertDialog(
+          title: Text('Incorrect Password'),
+        );
+      }
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,15 +135,7 @@ class LoginPage extends StatelessWidget {
 
               // sign in button
               MyButton(
-                onTap: () {
-                  FirebaseFirestore.instance.collection('"userdata"').add(
-                      {
-                        // "name":"usama mukhtiar",
-                        // "email":"demo@gmail.com"
-                      });
-                  // Call the signUserIn method when the button is tapped
-                  signUserIn(context);
-                },
+                onTap: signUserIn,
               ),
 
               const SizedBox(height: 50),

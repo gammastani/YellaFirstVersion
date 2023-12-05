@@ -1,31 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
+  final user = FirebaseAuth.instance.currentUser!;
+  void signUserOut(){
+    FirebaseAuth.instance.signOut();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        actions: [
+          IconButton(
+            onPressed: signUserOut,
+            icon: Icon(Icons.logout))],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Logged In!"),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                print('Logging out...');
-                // Navigate back to the previous screen (in this case, login page)
-                Navigator.pop(context);
-              },
-              child: const Text('Logout'),
-            ),
-          ],
-        ),
-      ),
+      body: Center(child: Text("LOGGED IN AS:" + user.email!)),
     );
   }
 }
