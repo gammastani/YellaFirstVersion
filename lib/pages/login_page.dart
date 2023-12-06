@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:yellafirstversion/components/my_button.dart';
 import 'package:yellafirstversion/components/my_textfield.dart';
 import 'package:yellafirstversion/components/square_tile.dart';
+import 'package:yellafirstversion/services/auth_service.dart';
 import 'home_page.dart';
-
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
 
@@ -64,6 +64,8 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,16 +170,18 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 50),
 
                 // google + apple sign in buttons
-                const Row(
+                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // google button
-                    SquareTile(imagePath: 'lib/images/google.png'),
+                    SquareTile(
+                        onTap: () => AuthService().signInWithGoogle(),
+                        imagePath: 'lib/images/google.png'),
 
-                    SizedBox(width: 25),
-
-                    // apple button
-                    SquareTile(imagePath: 'lib/images/google.png')
+                    // SizedBox(width: 25),
+                    //
+                    // // apple button
+                    // SquareTile(imagePath: 'lib/images/google.png')
                   ],
                 ),
 
