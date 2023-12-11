@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'login_or_register_page.dart';
+import 'package:yellafirstversion/pages/event_page.dart';
 import 'home_page.dart';
 
 class AuthPage extends StatelessWidget {
@@ -13,7 +14,7 @@ class AuthPage extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot){
           if (snapshot.hasData){
-            return HomePage();
+            return const EventPage();
           }
           else{
             return LoginOrRegisterPage();

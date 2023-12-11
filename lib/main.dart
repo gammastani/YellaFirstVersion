@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:yellafirstversion/pages/auth_page.dart';
-import 'package:yellafirstversion/pages/login_page.dart';
+
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

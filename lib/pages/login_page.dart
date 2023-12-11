@@ -5,7 +5,8 @@ import 'package:yellafirstversion/components/my_button.dart';
 import 'package:yellafirstversion/components/my_textfield.dart';
 import 'package:yellafirstversion/components/square_tile.dart';
 import 'package:yellafirstversion/services/auth_service.dart';
-import 'home_page.dart';
+import 'package:yellafirstversion/pages/event_page.dart';
+
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
 
@@ -38,6 +39,10 @@ class _LoginPageState extends State<LoginPage> {
           password: passwordController.text,
         );
         Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => EventPage()),
+        ); // Navigate to EventPage
       } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
 
@@ -50,14 +55,14 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Error'),
+          title: const Text('Error'),
           content: Text(message),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
