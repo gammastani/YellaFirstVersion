@@ -4,9 +4,13 @@ import 'package:yellafirstversion/components/event_item.dart'; // Import EventIt
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yellafirstversion/pages/auth_page.dart';
+import 'package:yellafirstversion/components/menu_button.dart'; // Import your MenuButton component
+import 'package:yellafirstversion/components/app_drawer.dart'; // Import AppDrawer component
+import 'package:yellafirstversion/components/custom_scaffold.dart';
+
 
 class EventPage extends StatefulWidget {
-  const EventPage({super.key});
+  const EventPage({Key? key}) : super(key: key);
 
   @override
   _EventPageState createState() => _EventPageState();
@@ -47,61 +51,8 @@ class _EventPageState extends State<EventPage> {
       );
     }
 
-    return Scaffold(
-      key: _scaffoldKey, // Use GlobalKey here
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFFF5733), // Primary Color
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Expanded(
-              child: Text("Welcome!",overflow: TextOverflow.ellipsis),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              child: const Text(
-                  "User's Location",
-                  style: TextStyle(fontSize: 14),
-                  overflow: TextOverflow.ellipsis
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => _scaffoldKey.currentState!.openEndDrawer(), // Use GlobalKey to open drawer
-          ),
-        ],
-      ),
-      endDrawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              title: const Text('Home'),
-              onTap: () {
-                Navigator.pushNamed(context, '/home_page');
-              },
-            ),
-            ListTile(
-              title: const Text('Login'),
-              onTap: () {
-                Navigator.pushNamed(context, '/login_page.dart');
-              },
-            ),
-            ListTile(
-                title: const Text('Logout'),
-                leading: const Icon(Icons.logout),
-                onTap: signUserOut,
-            ),
-            // More navigation items
-          ],
-        ),
-      ),
+    return CustomScaffold(
+      title: 'Events',
       body: Column(
         children: [
           Expanded(
